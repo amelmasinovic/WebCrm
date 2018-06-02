@@ -29,5 +29,7 @@ namespace WebCrm.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<WebCrm.Models.Model.Company> Companies { get; set; }
     }
 }
