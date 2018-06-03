@@ -37,6 +37,7 @@
     <Property Name="City" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Country" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateDate" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="NoteSet">
     <Key>
@@ -46,6 +47,7 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateDate" Type="datetime" Nullable="true" />
     <Property Name="Company_Id" Type="int" Nullable="false" />
     <Property Name="Person_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -59,6 +61,7 @@
     <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Phone" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateDate" Type="datetime" Nullable="true" />
     <Property Name="Company_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TaskSet">
@@ -70,6 +73,7 @@
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Date" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateDate" Type="datetime" Nullable="true" />
     <Property Name="Company_Id" Type="int" Nullable="false" />
     <Property Name="Person_Id" Type="int" Nullable="false" />
   </EntityType>

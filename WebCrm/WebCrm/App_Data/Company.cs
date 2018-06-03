@@ -29,6 +29,7 @@ namespace WebCrm.App_Data
         public string City { get; set; }
         public string Country { get; set; }
         public string CreateUser { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Note> Note { get; set; }

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/03/2018 18:10:07
+-- Date Created: 06/03/2018 23:53:04
 -- Generated from EDMX file: C:\Users\amel_\Documents\GitHub\WebCrm\WebCrm\WebCrm\App_Data\WebCrmModel.edmx
 -- --------------------------------------------------
 
@@ -62,7 +62,8 @@ CREATE TABLE [dbo].[CompanySet] (
     [Zip] nvarchar(max)  NULL,
     [City] nvarchar(max)  NULL,
     [Country] nvarchar(max)  NULL,
-    [CreateUser] nvarchar(max)  NULL
+    [CreateUser] nvarchar(max)  NULL,
+    [CreateDate] datetime  NULL
 );
 GO
 
@@ -72,6 +73,7 @@ CREATE TABLE [dbo].[NoteSet] (
     [Name] nvarchar(max)  NULL,
     [Description] nvarchar(max)  NULL,
     [CreateUser] nvarchar(max)  NULL,
+    [CreateDate] datetime  NULL,
     [Company_Id] int  NOT NULL,
     [Person_Id] int  NOT NULL
 );
@@ -85,6 +87,7 @@ CREATE TABLE [dbo].[PersonSet] (
     [Email] nvarchar(max)  NULL,
     [Phone] nvarchar(max)  NULL,
     [CreateUser] nvarchar(max)  NULL,
+    [CreateDate] datetime  NULL,
     [Company_Id] int  NOT NULL
 );
 GO
@@ -96,6 +99,7 @@ CREATE TABLE [dbo].[TaskSet] (
     [Description] nvarchar(max)  NULL,
     [Date] nvarchar(max)  NULL,
     [CreateUser] nvarchar(max)  NULL,
+    [CreateDate] datetime  NULL,
     [Company_Id] int  NOT NULL,
     [Person_Id] int  NOT NULL
 );

@@ -27,6 +27,7 @@ namespace WebCrm.App_Data
         public string Email { get; set; }
         public string Phone { get; set; }
         public string CreateUser { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
     
         public virtual Company Company { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

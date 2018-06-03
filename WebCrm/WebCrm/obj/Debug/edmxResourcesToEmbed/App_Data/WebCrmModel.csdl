@@ -37,6 +37,7 @@
     <Property Name="City" Type="String" Nullable="true" />
     <Property Name="Country" Type="String" Nullable="true" />
     <Property Name="CreateUser" Type="String" Nullable="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="true" />
     <NavigationProperty Name="Note" Relationship="WebCrmModel.CompanyNote" FromRole="Company" ToRole="Note" />
     <NavigationProperty Name="Person" Relationship="WebCrmModel.CompanyPerson" FromRole="Company" ToRole="Person" />
     <NavigationProperty Name="Task" Relationship="WebCrmModel.CompanyTask" FromRole="Company" ToRole="Task" />
@@ -49,6 +50,7 @@
     <Property Name="Name" Type="String" Nullable="true" />
     <Property Name="Description" Type="String" Nullable="true" />
     <Property Name="CreateUser" Type="String" Nullable="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="true" />
     <NavigationProperty Name="Company" Relationship="WebCrmModel.CompanyNote" FromRole="Note" ToRole="Company" />
     <NavigationProperty Name="Person" Relationship="WebCrmModel.PersonNote" FromRole="Note" ToRole="Person" />
   </EntityType>
@@ -62,6 +64,7 @@
     <Property Name="Email" Type="String" Nullable="true" />
     <Property Name="Phone" Type="String" Nullable="true" />
     <Property Name="CreateUser" Type="String" Nullable="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="true" />
     <NavigationProperty Name="Company" Relationship="WebCrmModel.CompanyPerson" FromRole="Person" ToRole="Company" />
     <NavigationProperty Name="Task" Relationship="WebCrmModel.PersonTask" FromRole="Person" ToRole="Task" />
     <NavigationProperty Name="Note" Relationship="WebCrmModel.PersonNote" FromRole="Person" ToRole="Note" />
@@ -77,6 +80,7 @@
     <Property Name="CreateUser" Type="String" Nullable="true" />
     <NavigationProperty Name="Company" Relationship="WebCrmModel.CompanyTask" FromRole="Task" ToRole="Company" />
     <NavigationProperty Name="Person" Relationship="WebCrmModel.PersonTask" FromRole="Task" ToRole="Person" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="true" />
   </EntityType>
   <Association Name="CompanyNote">
     <End Type="WebCrmModel.Company" Role="Company" Multiplicity="1" />

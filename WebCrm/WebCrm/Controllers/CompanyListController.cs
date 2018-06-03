@@ -10,10 +10,10 @@ using System.Web.Mvc;
 using WebCrm.App_Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using WebCrm.Models;
 
 namespace WebCrm.Controllers
 {
+    [Authorize]
     public class CompanyListController : Controller
     {
         private WebCrmModelContainer db = new WebCrmModelContainer();

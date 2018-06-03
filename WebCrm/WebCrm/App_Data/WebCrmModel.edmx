@@ -42,6 +42,7 @@
     <Property Name="City" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Country" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateDate" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="NoteSet">
     <Key>
@@ -51,6 +52,7 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateDate" Type="datetime" Nullable="true" />
     <Property Name="Company_Id" Type="int" Nullable="false" />
     <Property Name="Person_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -64,6 +66,7 @@
     <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Phone" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateDate" Type="datetime" Nullable="true" />
     <Property Name="Company_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TaskSet">
@@ -75,6 +78,7 @@
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Date" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateDate" Type="datetime" Nullable="true" />
     <Property Name="Company_Id" Type="int" Nullable="false" />
     <Property Name="Person_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -179,6 +183,7 @@
           <Property Name="City" Type="String" Nullable="true" />
           <Property Name="Country" Type="String" Nullable="true" />
           <Property Name="CreateUser" Type="String" Nullable="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="Note" Relationship="WebCrmModel.CompanyNote" FromRole="Company" ToRole="Note" />
           <NavigationProperty Name="Person" Relationship="WebCrmModel.CompanyPerson" FromRole="Company" ToRole="Person" />
           <NavigationProperty Name="Task" Relationship="WebCrmModel.CompanyTask" FromRole="Company" ToRole="Task" />
@@ -191,6 +196,7 @@
           <Property Name="Name" Type="String" Nullable="true" />
           <Property Name="Description" Type="String" Nullable="true" />
           <Property Name="CreateUser" Type="String" Nullable="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="Company" Relationship="WebCrmModel.CompanyNote" FromRole="Note" ToRole="Company" />
           <NavigationProperty Name="Person" Relationship="WebCrmModel.PersonNote" FromRole="Note" ToRole="Person" />
         </EntityType>
@@ -204,6 +210,7 @@
           <Property Name="Email" Type="String" Nullable="true" />
           <Property Name="Phone" Type="String" Nullable="true" />
           <Property Name="CreateUser" Type="String" Nullable="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="Company" Relationship="WebCrmModel.CompanyPerson" FromRole="Person" ToRole="Company" />
           <NavigationProperty Name="Task" Relationship="WebCrmModel.PersonTask" FromRole="Person" ToRole="Task" />
           <NavigationProperty Name="Note" Relationship="WebCrmModel.PersonNote" FromRole="Person" ToRole="Note" />
@@ -219,6 +226,7 @@
           <Property Name="CreateUser" Type="String" Nullable="true" />
           <NavigationProperty Name="Company" Relationship="WebCrmModel.CompanyTask" FromRole="Task" ToRole="Company" />
           <NavigationProperty Name="Person" Relationship="WebCrmModel.PersonTask" FromRole="Task" ToRole="Person" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="true" />
         </EntityType>
         <Association Name="CompanyNote">
           <End Type="WebCrmModel.Company" Role="Company" Multiplicity="1" />
@@ -256,6 +264,7 @@
           <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="Country" ColumnName="Country" />
           <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -266,6 +275,7 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -278,6 +288,7 @@
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -289,6 +300,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

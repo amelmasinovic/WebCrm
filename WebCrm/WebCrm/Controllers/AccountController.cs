@@ -86,7 +86,7 @@ namespace WebCrm.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Korisničko ime ili lozinka koje ste upisali nije ispravna. Molim Vas da pokušate ponovo (provjerite da li je Caps Lock isključen)..");
                     return View(model);
             }
         }
@@ -129,7 +129,7 @@ namespace WebCrm.Controllers
                     return View("Lockout");
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid code.");
+                    ModelState.AddModelError("", "Pogrešan kod.");
                     return View(model);
             }
         }

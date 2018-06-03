@@ -1,14 +1,14 @@
 ﻿@model WebCrm.App_Data.Company
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalji";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Detalji</h2>
 
 <div>
-    <h4>Company</h4>
+    <h4>Firma</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -54,6 +54,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Promjeni", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Nazad na listu", "Index")
 </p>

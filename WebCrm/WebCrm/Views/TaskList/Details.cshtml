@@ -1,7 +1,7 @@
 ﻿@model WebCrm.App_Data.Task
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalji";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -46,6 +46,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Promjeni", "Promjeni", new { id = Model.Id }) |
+    @Html.ActionLink("Nazad u listu", "Index")
 </p>

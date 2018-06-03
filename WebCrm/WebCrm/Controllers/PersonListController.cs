@@ -10,6 +10,7 @@ using WebCrm.App_Data;
 
 namespace WebCrm.Controllers
 {
+    [Authorize]
     public class PersonListController : Controller
     {
         private WebCrmModelContainer db = new WebCrmModelContainer();
