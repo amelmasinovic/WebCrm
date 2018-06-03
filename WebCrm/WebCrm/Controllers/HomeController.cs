@@ -5,7 +5,7 @@ namespace WebCrm.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        public ActionResult Dashboard()
+        public ActionResult Index()
         {
             return View();
         }
