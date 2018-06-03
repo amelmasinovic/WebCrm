@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WebCrmModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="WebCrmModelStoreContainer">
+    <EntitySet Name="CompanySet" EntityType="WebCrmModel.Store.CompanySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NoteSet" EntityType="WebCrmModel.Store.NoteSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonSet" EntityType="WebCrmModel.Store.PersonSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TaskSet" EntityType="WebCrmModel.Store.TaskSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CompanyNote" Association="WebCrmModel.Store.CompanyNote">
+      <End Role="Company" EntitySet="CompanySet" />
+      <End Role="Note" EntitySet="NoteSet" />
+    </AssociationSet>
+    <AssociationSet Name="CompanyPerson" Association="WebCrmModel.Store.CompanyPerson">
+      <End Role="Company" EntitySet="CompanySet" />
+      <End Role="Person" EntitySet="PersonSet" />
+    </AssociationSet>
+    <AssociationSet Name="CompanyTask" Association="WebCrmModel.Store.CompanyTask">
+      <End Role="Company" EntitySet="CompanySet" />
+      <End Role="Task" EntitySet="TaskSet" />
+    </AssociationSet>
+    <AssociationSet Name="PersonTask" Association="WebCrmModel.Store.PersonTask">
+      <End Role="Person" EntitySet="PersonSet" />
+      <End Role="Task" EntitySet="TaskSet" />
+    </AssociationSet>
+    <AssociationSet Name="PersonNote" Association="WebCrmModel.Store.PersonNote">
+      <End Role="Person" EntitySet="PersonSet" />
+      <End Role="Note" EntitySet="NoteSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CompanySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Street" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Zip" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="City" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Country" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="NoteSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Company_Id" Type="int" Nullable="false" />
+    <Property Name="Person_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Forename" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Phone" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Company_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Date" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Company_Id" Type="int" Nullable="false" />
+    <Property Name="Person_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CompanyNote">
+    <End Role="Company" Type="WebCrmModel.Store.CompanySet" Multiplicity="1" />
+    <End Role="Note" Type="WebCrmModel.Store.NoteSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Note">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompanyPerson">
+    <End Role="Company" Type="WebCrmModel.Store.CompanySet" Multiplicity="1" />
+    <End Role="Person" Type="WebCrmModel.Store.PersonSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompanyTask">
+    <End Role="Company" Type="WebCrmModel.Store.CompanySet" Multiplicity="1" />
+    <End Role="Task" Type="WebCrmModel.Store.TaskSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonTask">
+    <End Role="Person" Type="WebCrmModel.Store.PersonSet" Multiplicity="1" />
+    <End Role="Task" Type="WebCrmModel.Store.TaskSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="Person_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonNote">
+    <End Role="Person" Type="WebCrmModel.Store.PersonSet" Multiplicity="1" />
+    <End Role="Note" Type="WebCrmModel.Store.NoteSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Note">
+        <PropertyRef Name="Person_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using WebCrm;
+using WebCrm.App_Data;
 
 namespace WebCrm.Controllers
 {
@@ -14,13 +14,13 @@ namespace WebCrm.Controllers
     {
         private WebCrmModelContainer db = new WebCrmModelContainer();
 
-        // GET: Person
+        // GET: PersonList
         public ActionResult Index()
         {
             return View(db.PersonSet.ToList());
         }
 
-        // GET: Person/Details/5
+        // GET: PersonList/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,13 +35,13 @@ namespace WebCrm.Controllers
             return View(person);
         }
 
-        // GET: Person/Create
+        // GET: PersonList/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Person/Create
+        // POST: PersonList/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -58,7 +58,7 @@ namespace WebCrm.Controllers
             return View(person);
         }
 
-        // GET: Person/Edit/5
+        // GET: PersonList/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,7 +73,7 @@ namespace WebCrm.Controllers
             return View(person);
         }
 
-        // POST: Person/Edit/5
+        // POST: PersonList/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -89,7 +89,7 @@ namespace WebCrm.Controllers
             return View(person);
         }
 
-        // GET: Person/Delete/5
+        // GET: PersonList/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,7 +104,7 @@ namespace WebCrm.Controllers
             return View(person);
         }
 
-        // POST: Person/Delete/5
+        // POST: PersonList/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

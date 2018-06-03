@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WebCrmModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="WebCrmModelStoreContainer">
+    <EntitySet Name="CompanySet" EntityType="WebCrmModel.Store.CompanySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NoteSet" EntityType="WebCrmModel.Store.NoteSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonSet" EntityType="WebCrmModel.Store.PersonSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TaskSet" EntityType="WebCrmModel.Store.TaskSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CompanyNote" Association="WebCrmModel.Store.CompanyNote">
+      <End Role="Company" EntitySet="CompanySet" />
+      <End Role="Note" EntitySet="NoteSet" />
+    </AssociationSet>
+    <AssociationSet Name="CompanyPerson" Association="WebCrmModel.Store.CompanyPerson">
+      <End Role="Company" EntitySet="CompanySet" />
+      <End Role="Person" EntitySet="PersonSet" />
+    </AssociationSet>
+    <AssociationSet Name="CompanyTask" Association="WebCrmModel.Store.CompanyTask">
+      <End Role="Company" EntitySet="CompanySet" />
+      <End Role="Task" EntitySet="TaskSet" />
+    </AssociationSet>
+    <AssociationSet Name="PersonTask" Association="WebCrmModel.Store.PersonTask">
+      <End Role="Person" EntitySet="PersonSet" />
+      <End Role="Task" EntitySet="TaskSet" />
+    </AssociationSet>
+    <AssociationSet Name="PersonNote" Association="WebCrmModel.Store.PersonNote">
+      <End Role="Person" EntitySet="PersonSet" />
+      <End Role="Note" EntitySet="NoteSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CompanySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Street" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Zip" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="City" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Country" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="NoteSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Company_Id" Type="int" Nullable="false" />
+    <Property Name="Person_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Forename" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Phone" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Company_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Date" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Company_Id" Type="int" Nullable="false" />
+    <Property Name="Person_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CompanyNote">
+    <End Role="Company" Type="WebCrmModel.Store.CompanySet" Multiplicity="1" />
+    <End Role="Note" Type="WebCrmModel.Store.NoteSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Note">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompanyPerson">
+    <End Role="Company" Type="WebCrmModel.Store.CompanySet" Multiplicity="1" />
+    <End Role="Person" Type="WebCrmModel.Store.PersonSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompanyTask">
+    <End Role="Company" Type="WebCrmModel.Store.CompanySet" Multiplicity="1" />
+    <End Role="Task" Type="WebCrmModel.Store.TaskSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonTask">
+    <End Role="Person" Type="WebCrmModel.Store.PersonSet" Multiplicity="1" />
+    <End Role="Task" Type="WebCrmModel.Store.TaskSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="Person_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonNote">
+    <End Role="Person" Type="WebCrmModel.Store.PersonSet" Multiplicity="1" />
+    <End Role="Note" Type="WebCrmModel.Store.NoteSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Note">
+        <PropertyRef Name="Person_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="WebCrmModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="WebCrmModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CompanySet" EntityType="WebCrmModel.Company" />
+          <EntitySet Name="NoteSet" EntityType="WebCrmModel.Note" />
+          <EntitySet Name="PersonSet" EntityType="WebCrmModel.Person" />
+          <EntitySet Name="TaskSet" EntityType="WebCrmModel.Task" />
+          <AssociationSet Name="CompanyNote" Association="WebCrmModel.CompanyNote">
+            <End Role="Company" EntitySet="CompanySet" />
+            <End Role="Note" EntitySet="NoteSet" />
+          </AssociationSet>
+          <AssociationSet Name="CompanyPerson" Association="WebCrmModel.CompanyPerson">
+            <End Role="Company" EntitySet="CompanySet" />
+            <End Role="Person" EntitySet="PersonSet" />
+          </AssociationSet>
+          <AssociationSet Name="CompanyTask" Association="WebCrmModel.CompanyTask">
+            <End Role="Company" EntitySet="CompanySet" />
+            <End Role="Task" EntitySet="TaskSet" />
+          </AssociationSet>
+          <AssociationSet Name="PersonTask" Association="WebCrmModel.PersonTask">
+            <End Role="Person" EntitySet="PersonSet" />
+            <End Role="Task" EntitySet="TaskSet" />
+          </AssociationSet>
+          <AssociationSet Name="PersonNote" Association="WebCrmModel.PersonNote">
+            <End Role="Person" EntitySet="PersonSet" />
+            <End Role="Note" EntitySet="NoteSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="true" />
+          <Property Name="Street" Type="String" Nullable="true" />
+          <Property Name="Zip" Type="String" Nullable="true" />
+          <Property Name="City" Type="String" Nullable="true" />
+          <Property Name="Country" Type="String" Nullable="true" />
+          <Property Name="CreateUser" Type="String" Nullable="true" />
+          <NavigationProperty Name="Note" Relationship="WebCrmModel.CompanyNote" FromRole="Company" ToRole="Note" />
+          <NavigationProperty Name="Person" Relationship="WebCrmModel.CompanyPerson" FromRole="Company" ToRole="Person" />
+          <NavigationProperty Name="Task" Relationship="WebCrmModel.CompanyTask" FromRole="Company" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="true" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <Property Name="CreateUser" Type="String" Nullable="true" />
+          <NavigationProperty Name="Company" Relationship="WebCrmModel.CompanyNote" FromRole="Note" ToRole="Company" />
+          <NavigationProperty Name="Person" Relationship="WebCrmModel.PersonNote" FromRole="Note" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Forename" Type="String" Nullable="true" />
+          <Property Name="Surname" Type="String" Nullable="true" />
+          <Property Name="Email" Type="String" Nullable="true" />
+          <Property Name="Phone" Type="String" Nullable="true" />
+          <Property Name="CreateUser" Type="String" Nullable="true" />
+          <NavigationProperty Name="Company" Relationship="WebCrmModel.CompanyPerson" FromRole="Person" ToRole="Company" />
+          <NavigationProperty Name="Task" Relationship="WebCrmModel.PersonTask" FromRole="Person" ToRole="Task" />
+          <NavigationProperty Name="Note" Relationship="WebCrmModel.PersonNote" FromRole="Person" ToRole="Note" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="true" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <Property Name="Date" Type="String" Nullable="true" />
+          <Property Name="CreateUser" Type="String" Nullable="true" />
+          <NavigationProperty Name="Company" Relationship="WebCrmModel.CompanyTask" FromRole="Task" ToRole="Company" />
+          <NavigationProperty Name="Person" Relationship="WebCrmModel.PersonTask" FromRole="Task" ToRole="Person" />
+        </EntityType>
+        <Association Name="CompanyNote">
+          <End Type="WebCrmModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="WebCrmModel.Note" Role="Note" Multiplicity="*" />
+        </Association>
+        <Association Name="CompanyPerson">
+          <End Type="WebCrmModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="WebCrmModel.Person" Role="Person" Multiplicity="*" />
+        </Association>
+        <Association Name="CompanyTask">
+          <End Type="WebCrmModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="WebCrmModel.Task" Role="Task" Multiplicity="*" />
+        </Association>
+        <Association Name="PersonTask">
+          <End Type="WebCrmModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="WebCrmModel.Task" Role="Task" Multiplicity="*" />
+        </Association>
+        <Association Name="PersonNote">
+          <End Type="WebCrmModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="WebCrmModel.Note" Role="Note" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WebCrmModelStoreContainer" CdmEntityContainer="WebCrmModelContainer">
+    <EntitySetMapping Name="CompanySet">
+      <EntityTypeMapping TypeName="IsTypeOf(WebCrmModel.Company)">
+        <MappingFragment StoreEntitySet="CompanySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Street" ColumnName="Street" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NoteSet">
+      <EntityTypeMapping TypeName="IsTypeOf(WebCrmModel.Note)">
+        <MappingFragment StoreEntitySet="NoteSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonSet">
+      <EntityTypeMapping TypeName="IsTypeOf(WebCrmModel.Person)">
+        <MappingFragment StoreEntitySet="PersonSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Forename" ColumnName="Forename" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskSet">
+      <EntityTypeMapping TypeName="IsTypeOf(WebCrmModel.Task)">
+        <MappingFragment StoreEntitySet="TaskSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="CompanyNote" TypeName="WebCrmModel.CompanyNote" StoreEntitySet="NoteSet">
+      <EndProperty Name="Company">
+        <ScalarProperty Name="Id" ColumnName="Company_Id" />
+      </EndProperty>
+      <EndProperty Name="Note">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CompanyPerson" TypeName="WebCrmModel.CompanyPerson" StoreEntitySet="PersonSet">
+      <EndProperty Name="Company">
+        <ScalarProperty Name="Id" ColumnName="Company_Id" />
+      </EndProperty>
+      <EndProperty Name="Person">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CompanyTask" TypeName="WebCrmModel.CompanyTask" StoreEntitySet="TaskSet">
+      <EndProperty Name="Company">
+        <ScalarProperty Name="Id" ColumnName="Company_Id" />
+      </EndProperty>
+      <EndProperty Name="Task">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PersonTask" TypeName="WebCrmModel.PersonTask" StoreEntitySet="TaskSet">
+      <EndProperty Name="Person">
+        <ScalarProperty Name="Id" ColumnName="Person_Id" />
+      </EndProperty>
+      <EndProperty Name="Task">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PersonNote" TypeName="WebCrmModel.PersonNote" StoreEntitySet="NoteSet">
+      <EndProperty Name="Person">
+        <ScalarProperty Name="Id" ColumnName="Person_Id" />
+      </EndProperty>
+      <EndProperty Name="Note">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -165,48 +165,51 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Data\CompanyMetaData.cs" />
+    <Compile Include="App_Data\PersonMetaData.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Company.cs">
+    <Compile Include="App_Data\Company.cs">
       <DependentUpon>WebCrmModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CompaniesController.cs" />
+    <Compile Include="Controllers\CompanyListController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NoteListController.cs" />
     <Compile Include="Controllers\PersonListController.cs" />
-    <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Controllers\TaskListController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Note.cs">
+    <Compile Include="App_Data\Note.cs">
       <DependentUpon>WebCrmModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Person.cs">
+    <Compile Include="App_Data\Person.cs">
       <DependentUpon>WebCrmModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Task.cs">
+    <Compile Include="App_Data\Task.cs">
       <DependentUpon>WebCrmModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="WebCrmModel.Context.cs">
+    <Compile Include="App_Data\WebCrmModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WebCrmModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="WebCrmModel.cs">
+    <Compile Include="App_Data\WebCrmModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WebCrmModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="WebCrmModel.Designer.cs">
+    <Compile Include="App_Data\WebCrmModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WebCrmModel.edmx</DependentUpon>
@@ -221,11 +224,12 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="WebCrmModel.edmx.sql" />
-    <Content Include="WebCrmModel.tt">
+    <Content Include="App_Data\WebCrmModel.edmx.sql" />
+    <Content Include="App_Data\WebCrmModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>WebCrmModel.cs</LastGenOutput>
       <DependentUpon>WebCrmModel.edmx</DependentUpon>
+      <CustomToolNamespace>WebCrm.App_Data</CustomToolNamespace>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -272,16 +276,17 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <EntityDeploy Include="WebCrmModel.edmx">
+    <EntityDeploy Include="App_Data\WebCrmModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WebCrmModel.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>WebCrm.App_Data</CustomToolNamespace>
     </EntityDeploy>
-    <Content Include="WebCrmModel.Context.tt">
+    <Content Include="App_Data\WebCrmModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>WebCrmModel.Context.cs</LastGenOutput>
       <DependentUpon>WebCrmModel.edmx</DependentUpon>
     </Content>
-    <Content Include="WebCrmModel.edmx.diagram">
+    <Content Include="App_Data\WebCrmModel.edmx.diagram">
       <DependentUpon>WebCrmModel.edmx</DependentUpon>
     </Content>
     <Content Include="Views\CompanyList\Create.cshtml" />
@@ -289,19 +294,23 @@
     <Content Include="Views\CompanyList\Details.cshtml" />
     <Content Include="Views\CompanyList\Edit.cshtml" />
     <Content Include="Views\CompanyList\Index.cshtml" />
-    <Content Include="Views\TaskList\Create.cshtml" />
-    <Content Include="Views\TaskList\Delete.cshtml" />
-    <Content Include="Views\TaskList\Details.cshtml" />
-    <Content Include="Views\TaskList\Edit.cshtml" />
-    <Content Include="Views\TaskList\Index.cshtml" />
     <Content Include="Views\PersonList\Create.cshtml" />
     <Content Include="Views\PersonList\Delete.cshtml" />
     <Content Include="Views\PersonList\Details.cshtml" />
     <Content Include="Views\PersonList\Edit.cshtml" />
     <Content Include="Views\PersonList\Index.cshtml" />
+    <Content Include="Views\TaskList\Create.cshtml" />
+    <Content Include="Views\TaskList\Delete.cshtml" />
+    <Content Include="Views\TaskList\Details.cshtml" />
+    <Content Include="Views\TaskList\Edit.cshtml" />
+    <Content Include="Views\TaskList\Index.cshtml" />
+    <Content Include="Views\NoteList\Create.cshtml" />
+    <Content Include="Views\NoteList\Delete.cshtml" />
+    <Content Include="Views\NoteList\Details.cshtml" />
+    <Content Include="Views\NoteList\Edit.cshtml" />
+    <Content Include="Views\NoteList\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Models\Model\" />
   </ItemGroup>
   <ItemGroup>

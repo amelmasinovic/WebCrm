@@ -22,9 +22,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Početna", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Firme", "About", "Home")</li>
-                    <li>@Html.ActionLink("Osobe", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Zadaci", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Firme", "Index", "CompanyList")</li>
+                    <li>@Html.ActionLink("Osobe", "Index", "PersonList")</li>
+                    <li>@Html.ActionLink("Zadaci", "Index", "TaskList")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
