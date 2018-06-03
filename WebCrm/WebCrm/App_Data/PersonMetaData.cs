@@ -21,5 +21,7 @@ namespace WebCrm.App_Data
         [Display(Name = "Telefon")]
         [Phone(ErrorMessage = "Unešeni broj nije validan")]
         public string Phone { get; set; }
+        [Display(Name = "Korisnik koje je napravio unos")]
+        public string CreateUser { get; set; }
     }
 }

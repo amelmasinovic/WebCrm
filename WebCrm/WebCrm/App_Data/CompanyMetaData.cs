@@ -22,5 +22,7 @@ namespace WebCrm.App_Data
         public string City { get; set; }
         [Display(Name = "Država")]
         public string Country { get; set; }
+        [Display(Name = "Korisnik koje je napravio unos")]
+        public string CreateUser { get; set; }
     }
 }

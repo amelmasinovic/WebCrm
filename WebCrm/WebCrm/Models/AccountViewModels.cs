@@ -49,9 +49,8 @@ namespace WebCrm.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Korisničko ime")]
+        public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -72,7 +71,7 @@ namespace WebCrm.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
         [Required]
-        [StringLength(100, ErrorMessage = "{0} mora biti duže od {2} znakova.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} mora biti duža od {2} znakova.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Lozinka")]
         public string Password { get; set; }
@@ -91,7 +90,7 @@ namespace WebCrm.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "{0} mora biti duže od {2} znakova.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} mora biti duža od {2} znakova.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
