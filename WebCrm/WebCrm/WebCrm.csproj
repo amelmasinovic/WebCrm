@@ -174,8 +174,11 @@
       <DependentUpon>WebCrmModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PersonListController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -281,6 +284,21 @@
     <Content Include="WebCrmModel.edmx.diagram">
       <DependentUpon>WebCrmModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\CompanyList\Create.cshtml" />
+    <Content Include="Views\CompanyList\Delete.cshtml" />
+    <Content Include="Views\CompanyList\Details.cshtml" />
+    <Content Include="Views\CompanyList\Edit.cshtml" />
+    <Content Include="Views\CompanyList\Index.cshtml" />
+    <Content Include="Views\TaskList\Create.cshtml" />
+    <Content Include="Views\TaskList\Delete.cshtml" />
+    <Content Include="Views\TaskList\Details.cshtml" />
+    <Content Include="Views\TaskList\Edit.cshtml" />
+    <Content Include="Views\TaskList\Index.cshtml" />
+    <Content Include="Views\PersonList\Create.cshtml" />
+    <Content Include="Views\PersonList\Delete.cshtml" />
+    <Content Include="Views\PersonList\Details.cshtml" />
+    <Content Include="Views\PersonList\Edit.cshtml" />
+    <Content Include="Views\PersonList\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

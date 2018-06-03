@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/03/2018 14:01:32
+-- Date Created: 06/03/2018 16:36:10
 -- Generated from EDMX file: C:\Users\amel_\Documents\GitHub\WebCrm\WebCrm\WebCrm\WebCrmModel.edmx
 -- --------------------------------------------------
 
