@@ -35,6 +35,9 @@ else
                 @Html.DisplayNameFor(model => model.Phone)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Company)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.CreateUser)
             </th>
             <th></th>
@@ -56,7 +59,10 @@ else
                     @Html.DisplayFor(modelItem => item.Phone)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CreateUser)
+                    @Html.DisplayFor(modelItem => item.Company.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateUserObject.UserName)
                 </td>
                 <td>
                     @Html.ActionLink("Promjeni", "Edit", new { id = item.Id }) |

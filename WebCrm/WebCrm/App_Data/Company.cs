@@ -17,9 +17,9 @@ namespace WebCrm.App_Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Company()
         {
-            this.Note = new HashSet<Note>();
-            this.Task = new HashSet<Task>();
             this.Person = new HashSet<Person>();
+            this.Task = new HashSet<Task>();
+            this.Note = new HashSet<Note>();
         }
     
         public int Id { get; set; }
@@ -32,10 +32,10 @@ namespace WebCrm.App_Data
         public Nullable<System.DateTime> CreateDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Note> Note { get; set; }
+        public virtual ICollection<Person> Person { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Task> Task { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Person> Person { get; set; }
+        public virtual ICollection<Note> Note { get; set; }
     }
 }

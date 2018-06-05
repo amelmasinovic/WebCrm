@@ -5,9 +5,9 @@
     <EntitySet Name="NoteSet" EntityType="WebCrmModel.Store.NoteSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PersonSet" EntityType="WebCrmModel.Store.PersonSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TaskSet" EntityType="WebCrmModel.Store.TaskSet" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="CompanyNote" Association="WebCrmModel.Store.CompanyNote">
+    <AssociationSet Name="CompanyPerson" Association="WebCrmModel.Store.CompanyPerson">
       <End Role="Company" EntitySet="CompanySet" />
-      <End Role="Note" EntitySet="NoteSet" />
+      <End Role="Person" EntitySet="PersonSet" />
     </AssociationSet>
     <AssociationSet Name="CompanyTask" Association="WebCrmModel.Store.CompanyTask">
       <End Role="Company" EntitySet="CompanySet" />
@@ -17,13 +17,13 @@
       <End Role="Person" EntitySet="PersonSet" />
       <End Role="Task" EntitySet="TaskSet" />
     </AssociationSet>
+    <AssociationSet Name="CompanyNote" Association="WebCrmModel.Store.CompanyNote">
+      <End Role="Company" EntitySet="CompanySet" />
+      <End Role="Note" EntitySet="NoteSet" />
+    </AssociationSet>
     <AssociationSet Name="PersonNote" Association="WebCrmModel.Store.PersonNote">
       <End Role="Person" EntitySet="PersonSet" />
       <End Role="Note" EntitySet="NoteSet" />
-    </AssociationSet>
-    <AssociationSet Name="CompanyPerson" Association="WebCrmModel.Store.CompanyPerson">
-      <End Role="Company" EntitySet="CompanySet" />
-      <End Role="Person" EntitySet="PersonSet" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="CompanySet">
@@ -48,8 +48,8 @@
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreateDate" Type="datetime" Nullable="true" />
-    <Property Name="Company_Id" Type="int" Nullable="false" />
-    <Property Name="Person_Id" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PersonSet">
     <Key>
@@ -71,21 +71,20 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Date" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreateDate" Type="datetime" Nullable="true" />
-    <Property Name="Company_Id" Type="int" Nullable="false" />
-    <Property Name="Person_Id" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="CompanyNote">
+  <Association Name="CompanyPerson">
     <End Role="Company" Type="WebCrmModel.Store.CompanySet" Multiplicity="1" />
-    <End Role="Note" Type="WebCrmModel.Store.NoteSet" Multiplicity="*" />
+    <End Role="Person" Type="WebCrmModel.Store.PersonSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Company">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Note">
-        <PropertyRef Name="Company_Id" />
+      <Dependent Role="Person">
+        <PropertyRef Name="CompanyId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -97,7 +96,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Task">
-        <PropertyRef Name="Company_Id" />
+        <PropertyRef Name="CompanyId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -109,7 +108,19 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Task">
-        <PropertyRef Name="Person_Id" />
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompanyNote">
+    <End Role="Company" Type="WebCrmModel.Store.CompanySet" Multiplicity="1" />
+    <End Role="Note" Type="WebCrmModel.Store.NoteSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Note">
+        <PropertyRef Name="CompanyId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -121,19 +132,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Note">
-        <PropertyRef Name="Person_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="CompanyPerson">
-    <End Role="Company" Type="WebCrmModel.Store.CompanySet" Multiplicity="1" />
-    <End Role="Person" Type="WebCrmModel.Store.PersonSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Company">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Person">
-        <PropertyRef Name="CompanyId" />
+        <PropertyRef Name="PersonId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

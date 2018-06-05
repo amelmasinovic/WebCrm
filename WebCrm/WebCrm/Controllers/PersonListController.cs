@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using WebCrm.App_Data;
 
 namespace WebCrm.Controllers
@@ -15,11 +16,19 @@ namespace WebCrm.Controllers
 	public class PersonListController : Controller
 	{
 		private WebCrmModelContainer db = new WebCrmModelContainer();
+		private ApplicationUserManager UserManager { get { return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); } }
 
 		// GET: PersonList
 		public ActionResult Index()
 		{
-			return View(db.PersonSet.ToList());
+			var personSet = db.PersonSet.ToList();
+
+			foreach (var person in personSet)
+			{
+				person.CreateUserObject = UserManager.FindById(person.CreateUser);
+			}
+
+			return View(personSet);
 		}
 
 		// GET: PersonList/Details/5

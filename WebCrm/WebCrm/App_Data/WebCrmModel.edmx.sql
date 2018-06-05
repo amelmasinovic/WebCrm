@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/05/2018 11:50:39
+-- Date Created: 06/05/2018 16:14:10
 -- Generated from EDMX file: C:\Users\amel.masinovic\Documents\GitHub\WebCrm\WebCrm\WebCrm\App_Data\WebCrmModel.edmx
 -- --------------------------------------------------
 
@@ -74,8 +74,8 @@ CREATE TABLE [dbo].[NoteSet] (
     [Description] nvarchar(max)  NULL,
     [CreateUser] nvarchar(max)  NULL,
     [CreateDate] datetime  NULL,
-    [Company_Id] int  NOT NULL,
-    [Person_Id] int  NOT NULL
+    [CompanyId] int  NOT NULL,
+    [PersonId] int  NOT NULL
 );
 GO
 
@@ -97,11 +97,10 @@ CREATE TABLE [dbo].[TaskSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NULL,
     [Description] nvarchar(max)  NULL,
-    [Date] nvarchar(max)  NULL,
     [CreateUser] nvarchar(max)  NULL,
     [CreateDate] datetime  NULL,
-    [Company_Id] int  NOT NULL,
-    [Person_Id] int  NOT NULL
+    [CompanyId] int  NOT NULL,
+    [PersonId] int  NOT NULL
 );
 GO
 
@@ -137,66 +136,6 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [Company_Id] in table 'NoteSet'
-ALTER TABLE [dbo].[NoteSet]
-ADD CONSTRAINT [FK_CompanyNote]
-    FOREIGN KEY ([Company_Id])
-    REFERENCES [dbo].[CompanySet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CompanyNote'
-CREATE INDEX [IX_FK_CompanyNote]
-ON [dbo].[NoteSet]
-    ([Company_Id]);
-GO
-
--- Creating foreign key on [Company_Id] in table 'TaskSet'
-ALTER TABLE [dbo].[TaskSet]
-ADD CONSTRAINT [FK_CompanyTask]
-    FOREIGN KEY ([Company_Id])
-    REFERENCES [dbo].[CompanySet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CompanyTask'
-CREATE INDEX [IX_FK_CompanyTask]
-ON [dbo].[TaskSet]
-    ([Company_Id]);
-GO
-
--- Creating foreign key on [Person_Id] in table 'TaskSet'
-ALTER TABLE [dbo].[TaskSet]
-ADD CONSTRAINT [FK_PersonTask]
-    FOREIGN KEY ([Person_Id])
-    REFERENCES [dbo].[PersonSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PersonTask'
-CREATE INDEX [IX_FK_PersonTask]
-ON [dbo].[TaskSet]
-    ([Person_Id]);
-GO
-
--- Creating foreign key on [Person_Id] in table 'NoteSet'
-ALTER TABLE [dbo].[NoteSet]
-ADD CONSTRAINT [FK_PersonNote]
-    FOREIGN KEY ([Person_Id])
-    REFERENCES [dbo].[PersonSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PersonNote'
-CREATE INDEX [IX_FK_PersonNote]
-ON [dbo].[NoteSet]
-    ([Person_Id]);
-GO
-
 -- Creating foreign key on [CompanyId] in table 'PersonSet'
 ALTER TABLE [dbo].[PersonSet]
 ADD CONSTRAINT [FK_CompanyPerson]
@@ -210,6 +149,66 @@ GO
 CREATE INDEX [IX_FK_CompanyPerson]
 ON [dbo].[PersonSet]
     ([CompanyId]);
+GO
+
+-- Creating foreign key on [CompanyId] in table 'TaskSet'
+ALTER TABLE [dbo].[TaskSet]
+ADD CONSTRAINT [FK_CompanyTask]
+    FOREIGN KEY ([CompanyId])
+    REFERENCES [dbo].[CompanySet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CompanyTask'
+CREATE INDEX [IX_FK_CompanyTask]
+ON [dbo].[TaskSet]
+    ([CompanyId]);
+GO
+
+-- Creating foreign key on [PersonId] in table 'TaskSet'
+ALTER TABLE [dbo].[TaskSet]
+ADD CONSTRAINT [FK_PersonTask]
+    FOREIGN KEY ([PersonId])
+    REFERENCES [dbo].[PersonSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PersonTask'
+CREATE INDEX [IX_FK_PersonTask]
+ON [dbo].[TaskSet]
+    ([PersonId]);
+GO
+
+-- Creating foreign key on [CompanyId] in table 'NoteSet'
+ALTER TABLE [dbo].[NoteSet]
+ADD CONSTRAINT [FK_CompanyNote]
+    FOREIGN KEY ([CompanyId])
+    REFERENCES [dbo].[CompanySet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CompanyNote'
+CREATE INDEX [IX_FK_CompanyNote]
+ON [dbo].[NoteSet]
+    ([CompanyId]);
+GO
+
+-- Creating foreign key on [PersonId] in table 'NoteSet'
+ALTER TABLE [dbo].[NoteSet]
+ADD CONSTRAINT [FK_PersonNote]
+    FOREIGN KEY ([PersonId])
+    REFERENCES [dbo].[PersonSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PersonNote'
+CREATE INDEX [IX_FK_PersonNote]
+ON [dbo].[NoteSet]
+    ([PersonId]);
 GO
 
 -- --------------------------------------------------
