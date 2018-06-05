@@ -36,6 +36,7 @@
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -56,14 +57,6 @@
         <ScalarProperty Name="Id" ColumnName="Company_Id" />
       </EndProperty>
       <EndProperty Name="Note">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="CompanyPerson" TypeName="WebCrmModel.CompanyPerson" StoreEntitySet="PersonSet">
-      <EndProperty Name="Company">
-        <ScalarProperty Name="Id" ColumnName="Company_Id" />
-      </EndProperty>
-      <EndProperty Name="Person">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>

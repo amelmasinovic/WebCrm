@@ -23,5 +23,9 @@ namespace WebCrm.App_Data
         public string Phone { get; set; }
         [Display(Name = "Korisnik koje je napravio unos")]
         public string CreateUser { get; set; }
-    }
+        [Display(Name = "Firma")]
+        [Required(ErrorMessage = "Obavezan unos")]
+        public int CompanyId { get; set; }
+
+	}
 }

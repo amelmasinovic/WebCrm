@@ -9,10 +9,6 @@
       <End Role="Company" EntitySet="CompanySet" />
       <End Role="Note" EntitySet="NoteSet" />
     </AssociationSet>
-    <AssociationSet Name="CompanyPerson" Association="WebCrmModel.CompanyPerson">
-      <End Role="Company" EntitySet="CompanySet" />
-      <End Role="Person" EntitySet="PersonSet" />
-    </AssociationSet>
     <AssociationSet Name="CompanyTask" Association="WebCrmModel.CompanyTask">
       <End Role="Company" EntitySet="CompanySet" />
       <End Role="Task" EntitySet="TaskSet" />
@@ -24,6 +20,10 @@
     <AssociationSet Name="PersonNote" Association="WebCrmModel.PersonNote">
       <End Role="Person" EntitySet="PersonSet" />
       <End Role="Note" EntitySet="NoteSet" />
+    </AssociationSet>
+    <AssociationSet Name="CompanyPerson" Association="WebCrmModel.CompanyPerson">
+      <End Role="Company" EntitySet="CompanySet" />
+      <End Role="Person" EntitySet="PersonSet" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Company">
@@ -39,8 +39,8 @@
     <Property Name="CreateUser" Type="String" Nullable="true" />
     <Property Name="CreateDate" Type="DateTime" Nullable="true" />
     <NavigationProperty Name="Note" Relationship="WebCrmModel.CompanyNote" FromRole="Company" ToRole="Note" />
-    <NavigationProperty Name="Person" Relationship="WebCrmModel.CompanyPerson" FromRole="Company" ToRole="Person" />
     <NavigationProperty Name="Task" Relationship="WebCrmModel.CompanyTask" FromRole="Company" ToRole="Task" />
+    <NavigationProperty Name="Person" Relationship="WebCrmModel.CompanyPerson" FromRole="Company" ToRole="Person" />
   </EntityType>
   <EntityType Name="Note">
     <Key>
@@ -65,9 +65,10 @@
     <Property Name="Phone" Type="String" Nullable="true" />
     <Property Name="CreateUser" Type="String" Nullable="true" />
     <Property Name="CreateDate" Type="DateTime" Nullable="true" />
-    <NavigationProperty Name="Company" Relationship="WebCrmModel.CompanyPerson" FromRole="Person" ToRole="Company" />
     <NavigationProperty Name="Task" Relationship="WebCrmModel.PersonTask" FromRole="Person" ToRole="Task" />
     <NavigationProperty Name="Note" Relationship="WebCrmModel.PersonNote" FromRole="Person" ToRole="Note" />
+    <NavigationProperty Name="Company" Relationship="WebCrmModel.CompanyPerson" FromRole="Person" ToRole="Company" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Task">
     <Key>
@@ -86,10 +87,6 @@
     <End Type="WebCrmModel.Company" Role="Company" Multiplicity="1" />
     <End Type="WebCrmModel.Note" Role="Note" Multiplicity="*" />
   </Association>
-  <Association Name="CompanyPerson">
-    <End Type="WebCrmModel.Company" Role="Company" Multiplicity="1" />
-    <End Type="WebCrmModel.Person" Role="Person" Multiplicity="*" />
-  </Association>
   <Association Name="CompanyTask">
     <End Type="WebCrmModel.Company" Role="Company" Multiplicity="1" />
     <End Type="WebCrmModel.Task" Role="Task" Multiplicity="*" />
@@ -101,5 +98,17 @@
   <Association Name="PersonNote">
     <End Type="WebCrmModel.Person" Role="Person" Multiplicity="1" />
     <End Type="WebCrmModel.Note" Role="Note" Multiplicity="*" />
+  </Association>
+  <Association Name="CompanyPerson">
+    <End Type="WebCrmModel.Company" Role="Company" Multiplicity="1" />
+    <End Type="WebCrmModel.Person" Role="Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>

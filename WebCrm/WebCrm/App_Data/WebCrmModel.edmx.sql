@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/03/2018 23:53:04
--- Generated from EDMX file: C:\Users\amel_\Documents\GitHub\WebCrm\WebCrm\WebCrm\App_Data\WebCrmModel.edmx
+-- Date Created: 06/05/2018 11:50:39
+-- Generated from EDMX file: C:\Users\amel.masinovic\Documents\GitHub\WebCrm\WebCrm\WebCrm\App_Data\WebCrmModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -20,9 +20,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_CompanyNote]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[NoteSet] DROP CONSTRAINT [FK_CompanyNote];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CompanyPerson]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonSet] DROP CONSTRAINT [FK_CompanyPerson];
-GO
 IF OBJECT_ID(N'[dbo].[FK_CompanyTask]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TaskSet] DROP CONSTRAINT [FK_CompanyTask];
 GO
@@ -31,6 +28,9 @@ IF OBJECT_ID(N'[dbo].[FK_PersonTask]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_PersonNote]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[NoteSet] DROP CONSTRAINT [FK_PersonNote];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CompanyPerson]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PersonSet] DROP CONSTRAINT [FK_CompanyPerson];
 GO
 
 -- --------------------------------------------------
@@ -88,7 +88,7 @@ CREATE TABLE [dbo].[PersonSet] (
     [Phone] nvarchar(max)  NULL,
     [CreateUser] nvarchar(max)  NULL,
     [CreateDate] datetime  NULL,
-    [Company_Id] int  NOT NULL
+    [CompanyId] int  NOT NULL
 );
 GO
 
@@ -152,21 +152,6 @@ ON [dbo].[NoteSet]
     ([Company_Id]);
 GO
 
--- Creating foreign key on [Company_Id] in table 'PersonSet'
-ALTER TABLE [dbo].[PersonSet]
-ADD CONSTRAINT [FK_CompanyPerson]
-    FOREIGN KEY ([Company_Id])
-    REFERENCES [dbo].[CompanySet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CompanyPerson'
-CREATE INDEX [IX_FK_CompanyPerson]
-ON [dbo].[PersonSet]
-    ([Company_Id]);
-GO
-
 -- Creating foreign key on [Company_Id] in table 'TaskSet'
 ALTER TABLE [dbo].[TaskSet]
 ADD CONSTRAINT [FK_CompanyTask]
@@ -210,6 +195,21 @@ GO
 CREATE INDEX [IX_FK_PersonNote]
 ON [dbo].[NoteSet]
     ([Person_Id]);
+GO
+
+-- Creating foreign key on [CompanyId] in table 'PersonSet'
+ALTER TABLE [dbo].[PersonSet]
+ADD CONSTRAINT [FK_CompanyPerson]
+    FOREIGN KEY ([CompanyId])
+    REFERENCES [dbo].[CompanySet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CompanyPerson'
+CREATE INDEX [IX_FK_CompanyPerson]
+ON [dbo].[PersonSet]
+    ([CompanyId]);
 GO
 
 -- --------------------------------------------------

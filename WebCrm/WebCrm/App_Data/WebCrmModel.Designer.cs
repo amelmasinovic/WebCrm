@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\amel_\Documents\GitHub\WebCrm\WebCrm\WebCrm\App_Data\WebCrmModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\amel.masinovic\Documents\GitHub\WebCrm\WebCrm\WebCrm\App_Data\WebCrmModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
