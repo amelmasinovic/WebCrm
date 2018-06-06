@@ -43,6 +43,9 @@ namespace WebCrm.Controllers
 			{
 				return HttpNotFound();
 			}
+
+			person.CreateUserObject = UserManager.FindById(person.CreateUser);
+
 			return View(person);
 		}
 

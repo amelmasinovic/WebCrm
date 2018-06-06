@@ -1,11 +1,11 @@
 ﻿@model WebCrm.App_Data.Company
 
 @{
-    ViewBag.Title = "Promjeni";
+    ViewBag.Title = "Uredi unos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Promjeni</h2>
+<h2>Uredi</h2>
 
 
 @using (Html.BeginForm())
@@ -13,7 +13,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Company</h4>
+        <h4>Firma</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)

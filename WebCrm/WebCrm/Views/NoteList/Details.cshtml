@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Detailji</h2>
 
 <div>
-    <h4>Note</h4>
+    <h4>Bilješka</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -32,12 +32,12 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CreateUser)
+            @Html.DisplayFor(model => model.CreateUserObject.UserName)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Promjeni", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Uredi", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Nazad u listu", "Index")
 </p>

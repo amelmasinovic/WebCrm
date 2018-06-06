@@ -48,12 +48,12 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CreateUser)
+            @Html.DisplayFor(model => model.CreateUserObject.UserName)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Promjeni", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Uredi", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Nazad na listu", "Index")
 </p>

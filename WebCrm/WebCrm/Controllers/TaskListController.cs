@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using WebCrm.App_Data;
 
 namespace WebCrm.Controllers
@@ -14,6 +16,7 @@ namespace WebCrm.Controllers
 	public class TaskListController : Controller
 	{
 		private WebCrmModelContainer db = new WebCrmModelContainer();
+		private ApplicationUserManager UserManager { get { return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); } }
 
 		// GET: TaskList
 		public ActionResult Index()
@@ -33,6 +36,9 @@ namespace WebCrm.Controllers
 			{
 				return HttpNotFound();
 			}
+
+			task.CreateUserObject = UserManager.FindById(task.CreateUser);
+
 			return View(task);
 		}
 
@@ -41,18 +47,22 @@ namespace WebCrm.Controllers
 		{
 			var companyList = GetCompanySelectList();
 			ViewBag.CompanyList = companyList;
+			var personList = GetPersonSelectList();
+			ViewBag.PersonList = personList;
+
 			return View();
 		}
-
 		// POST: TaskList/Create
 		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
 		// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create([Bind(Include = "Id,Name,Description,Date,CreateUser")] Task task)
+		public ActionResult Create([Bind(Include = "Id,Name,Description,Date,CompanyId,PersonId")] Task task)
 		{
 			if (ModelState.IsValid)
 			{
+				task.CreateUser = User.Identity.GetUserId();
+
 				db.TaskSet.Add(task);
 				db.SaveChanges();
 				return RedirectToAction("Index");
@@ -60,6 +70,8 @@ namespace WebCrm.Controllers
 
 			var companyList = GetCompanySelectList();
 			ViewBag.CompanyList = companyList;
+			var personList = GetPersonSelectList();
+			ViewBag.PersonList = personList;
 
 			return View(task);
 		}
@@ -79,6 +91,8 @@ namespace WebCrm.Controllers
 
 			var companyList = GetCompanySelectList();
 			ViewBag.CompanyList = companyList;
+			var personList = GetPersonSelectList();
+			ViewBag.PersonList = personList;
 
 			return View(task);
 		}
@@ -146,6 +160,20 @@ namespace WebCrm.Controllers
 				});
 			}
 			return companyList;
+		}
+		private object GetPersonSelectList()
+		{
+			var personSet = db.PersonSet.ToList();
+			var personList = new List<SelectListItem>();
+			foreach (var person in personSet)
+			{
+				personList.Add(new SelectListItem
+				{
+					Text = person.Forename + " " + person.Surname,
+					Value = person.Id.ToString()
+				});
+			}
+			return personList;
 		}
 	}
 }
