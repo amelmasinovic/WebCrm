@@ -25,6 +25,10 @@
       <End Role="Person" EntitySet="PersonSet" />
       <End Role="Note" EntitySet="NoteSet" />
     </AssociationSet>
+    <AssociationSet Name="TaskNote" Association="WebCrmModel.Store.TaskNote">
+      <End Role="Task" EntitySet="TaskSet" />
+      <End Role="Note" EntitySet="NoteSet" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="CompanySet">
     <Key>
@@ -50,6 +54,8 @@
     <Property Name="CreateDate" Type="datetime" Nullable="true" />
     <Property Name="CompanyId" Type="int" Nullable="false" />
     <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="TaskId" Type="int" Nullable="true" />
+    <Property Name="TaskId1" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PersonSet">
     <Key>
@@ -133,6 +139,18 @@
       </Principal>
       <Dependent Role="Note">
         <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TaskNote">
+    <End Role="Task" Type="WebCrmModel.Store.TaskSet" Multiplicity="1" />
+    <End Role="Note" Type="WebCrmModel.Store.NoteSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Note">
+        <PropertyRef Name="TaskId1" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -24,8 +24,11 @@ namespace WebCrm.App_Data
 		public int PersonId { get; set; }
 
 		[Display(Name = "Firma")]
+		[Required()]
 		public virtual Company Company { get; set; }
 		[Display(Name = "Osoba")]
 		public virtual Person Person { get; set; }
+		[Display(Name = "Korisnik koje je napravio unos")]
+		public string CreateUser { get; set; }
 	}
 }

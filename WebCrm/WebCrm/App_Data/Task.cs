@@ -14,6 +14,12 @@ namespace WebCrm.App_Data
     
     public partial class Task
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Task()
+        {
+            this.Note = new HashSet<Note>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -24,5 +30,7 @@ namespace WebCrm.App_Data
     
         public virtual Company Company { get; set; }
         public virtual Person Person { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Note> Note { get; set; }
     }
 }

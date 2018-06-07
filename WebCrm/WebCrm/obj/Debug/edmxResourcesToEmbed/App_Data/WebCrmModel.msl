@@ -25,6 +25,8 @@
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
           <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+          <ScalarProperty Name="TaskId1" ColumnName="TaskId1" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

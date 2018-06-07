@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/05/2018 16:14:10
+-- Date Created: 06/07/2018 10:58:57
 -- Generated from EDMX file: C:\Users\amel.masinovic\Documents\GitHub\WebCrm\WebCrm\WebCrm\App_Data\WebCrmModel.edmx
 -- --------------------------------------------------
 
@@ -17,8 +17,8 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_CompanyNote]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[NoteSet] DROP CONSTRAINT [FK_CompanyNote];
+IF OBJECT_ID(N'[dbo].[FK_CompanyPerson]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PersonSet] DROP CONSTRAINT [FK_CompanyPerson];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CompanyTask]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TaskSet] DROP CONSTRAINT [FK_CompanyTask];
@@ -26,11 +26,14 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PersonTask]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TaskSet] DROP CONSTRAINT [FK_PersonTask];
 GO
+IF OBJECT_ID(N'[dbo].[FK_CompanyNote]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[NoteSet] DROP CONSTRAINT [FK_CompanyNote];
+GO
 IF OBJECT_ID(N'[dbo].[FK_PersonNote]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[NoteSet] DROP CONSTRAINT [FK_PersonNote];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CompanyPerson]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonSet] DROP CONSTRAINT [FK_CompanyPerson];
+IF OBJECT_ID(N'[dbo].[FK_TaskNote]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[NoteSet] DROP CONSTRAINT [FK_TaskNote];
 GO
 
 -- --------------------------------------------------
@@ -75,7 +78,9 @@ CREATE TABLE [dbo].[NoteSet] (
     [CreateUser] nvarchar(max)  NULL,
     [CreateDate] datetime  NULL,
     [CompanyId] int  NOT NULL,
-    [PersonId] int  NOT NULL
+    [PersonId] int  NOT NULL,
+    [TaskId] int  NULL,
+    [TaskId1] int  NOT NULL
 );
 GO
 
@@ -209,6 +214,21 @@ GO
 CREATE INDEX [IX_FK_PersonNote]
 ON [dbo].[NoteSet]
     ([PersonId]);
+GO
+
+-- Creating foreign key on [TaskId1] in table 'NoteSet'
+ALTER TABLE [dbo].[NoteSet]
+ADD CONSTRAINT [FK_TaskNote]
+    FOREIGN KEY ([TaskId1])
+    REFERENCES [dbo].[TaskSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TaskNote'
+CREATE INDEX [IX_FK_TaskNote]
+ON [dbo].[NoteSet]
+    ([TaskId1]);
 GO
 
 -- --------------------------------------------------

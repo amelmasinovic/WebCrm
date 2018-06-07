@@ -30,6 +30,10 @@
       <End Role="Person" EntitySet="PersonSet" />
       <End Role="Note" EntitySet="NoteSet" />
     </AssociationSet>
+    <AssociationSet Name="TaskNote" Association="WebCrmModel.Store.TaskNote">
+      <End Role="Task" EntitySet="TaskSet" />
+      <End Role="Note" EntitySet="NoteSet" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="CompanySet">
     <Key>
@@ -55,6 +59,8 @@
     <Property Name="CreateDate" Type="datetime" Nullable="true" />
     <Property Name="CompanyId" Type="int" Nullable="false" />
     <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="TaskId" Type="int" Nullable="true" />
+    <Property Name="TaskId1" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PersonSet">
     <Key>
@@ -141,6 +147,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="TaskNote">
+    <End Role="Task" Type="WebCrmModel.Store.TaskSet" Multiplicity="1" />
+    <End Role="Note" Type="WebCrmModel.Store.NoteSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Note">
+        <PropertyRef Name="TaskId1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -168,6 +186,10 @@
           </AssociationSet>
           <AssociationSet Name="PersonNote" Association="WebCrmModel.PersonNote">
             <End Role="Person" EntitySet="PersonSet" />
+            <End Role="Note" EntitySet="NoteSet" />
+          </AssociationSet>
+          <AssociationSet Name="TaskNote" Association="WebCrmModel.TaskNote">
+            <End Role="Task" EntitySet="TaskSet" />
             <End Role="Note" EntitySet="NoteSet" />
           </AssociationSet>
         </EntityContainer>
@@ -200,6 +222,9 @@
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Person" Relationship="WebCrmModel.PersonNote" FromRole="Note" ToRole="Person" />
           <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="TaskId" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="Task" Relationship="WebCrmModel.TaskNote" FromRole="Note" ToRole="Task" />
+          <Property Name="TaskId1" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Person">
           <Key>
@@ -230,6 +255,7 @@
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Person" Relationship="WebCrmModel.PersonTask" FromRole="Task" ToRole="Person" />
           <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Note" Relationship="WebCrmModel.TaskNote" FromRole="Task" ToRole="Note" />
         </EntityType>
         <Association Name="CompanyPerson">
           <End Type="WebCrmModel.Company" Role="Company" Multiplicity="1" />
@@ -291,6 +317,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="TaskNote">
+          <End Type="WebCrmModel.Task" Role="Task" Multiplicity="1" />
+          <End Type="WebCrmModel.Note" Role="Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="TaskId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -321,6 +359,8 @@
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
           <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+          <ScalarProperty Name="TaskId1" ColumnName="TaskId1" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

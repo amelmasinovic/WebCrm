@@ -14,32 +14,36 @@
 <div class="row">
     <div class="col-md-4">
         <h2>Zadnje bilješke</h2>
-        @foreach (var note in Model.Notes)
-        {
-        @note.Name
-        @note.Description
-        }
+        <ul>
+            @foreach (var note in Model.Notes)
+            {
+            @note.Name
+            @note.Description}
+        </ul>
         @if (Model.Notes.Count < 1)
         {
-        <p>Trenutno ne postoji bilješki u sistemu</p>
-        }
+        <p>Trenutno ne postoji bilješki u sistemu</p>}
     </div>
     <div class="col-md-8">
-
         <h2>Aktuelni zadaci</h2>
         <ul>
             @foreach (var task in Model.Tasks)
             {
-            <li >
-                <h5>
-                    @Html.ActionLink(task.Name, "Details", "TaskList", new {id = task.Id}, new {@class = "" })
-                </h5>
-                <p>@task.Description</p>
-            </li>
-
-            }
+            <li>
+                <p>
+                    <a href="@Url.Action("Details", "TaskList", new {id = task.Id})">@task.Name<br />@task.Description</a>
+                    (@if (task.Company != null)
+                    {<a href="@Url.Action("Details", "CompanyList", new { id = task.Company.Id })"><span>Firma: @task.Company.Name </span></a>}
+                    @if (task.Person != null)
+                    {<a href="@Url.Action("Details", "PersonList", new { id = task.Person.Id })"><span>Osoba: @task.Person.Forename @task.Person.Surname</span></a>})
+                </p>
+                <hr />
+            </li>}
         </ul>
-
+        @if (Model.Notes.Count < 1)
+        {
+        <p>Trenutno ne postoji zadataka u sistemu</p>
+        }
     </div>
     @*<div class="col-md-4">
             <h2>Web Hosting</h2>

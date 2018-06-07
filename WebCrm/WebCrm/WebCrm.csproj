@@ -168,8 +168,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Data\Company.cs">
+      <DependentUpon>WebCrmModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Data\CompanyMetaData.cs" />
+    <Compile Include="App_Data\Note.cs">
+      <DependentUpon>WebCrmModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Data\NoteMetaData.cs" />
+    <Compile Include="App_Data\Person.cs">
+      <DependentUpon>WebCrmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\Task.cs">
+      <DependentUpon>WebCrmModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Data\TaskMetaData.cs" />
     <Compile Include="App_Data\PersonMetaData.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -177,9 +189,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="App_Data\Company.cs">
-      <DependentUpon>WebCrmModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CompanyListController.cs" />
     <Compile Include="Models\DashboardViewModel.cs" />
@@ -194,17 +203,9 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="App_Data\Note.cs">
-      <DependentUpon>WebCrmModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="App_Data\Person.cs">
-      <DependentUpon>WebCrmModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\NoteService.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="App_Data\Task.cs">
-      <DependentUpon>WebCrmModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="App_Data\WebCrmModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

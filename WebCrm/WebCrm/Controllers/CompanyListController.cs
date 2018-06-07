@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using WebCrm.App_Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using WebCrm.Services;
 
 namespace WebCrm.Controllers
 {
@@ -18,6 +19,7 @@ namespace WebCrm.Controllers
 	{
 		private WebCrmModelContainer db = new WebCrmModelContainer();
 		private ApplicationUserManager UserManager { get { return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); } }
+		private NoteService noteService = new NoteService();
 
 		// GET: CompanyList
 		public ActionResult Index()
@@ -67,6 +69,8 @@ namespace WebCrm.Controllers
 				company.CreateUser = User.Identity.GetUserId();
 				try
 				{
+					noteService.CreateNote(CrudOperation.Create, UserManager.FindById(company.CreateUser), null, company, null);
+
 					db.CompanySet.Add(company);
 					db.SaveChanges();
 				}
@@ -114,6 +118,8 @@ namespace WebCrm.Controllers
 		{
 			if (ModelState.IsValid)
 			{
+				noteService.CreateNote(CrudOperation.Update, UserManager.FindById(company.CreateUser), null, company, null);
+
 				db.Entry(company).State = EntityState.Modified;
 				db.SaveChanges();
 				return RedirectToAction("Index");
@@ -142,6 +148,9 @@ namespace WebCrm.Controllers
 		public ActionResult DeleteConfirmed(int id)
 		{
 			Company company = db.CompanySet.Find(id);
+
+			noteService.CreateNote(CrudOperation.Update, UserManager.FindById(company?.CreateUser), null, company, null);
+
 			db.CompanySet.Remove(company);
 			db.SaveChanges();
 			return RedirectToAction("Index");

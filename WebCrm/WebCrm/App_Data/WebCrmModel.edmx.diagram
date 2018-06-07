@@ -15,6 +15,7 @@
         </AssociationConnector>
         <AssociationConnector Association="WebCrmModel.CompanyNote" />
         <AssociationConnector Association="WebCrmModel.PersonNote" />
+        <AssociationConnector Association="WebCrmModel.TaskNote" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
