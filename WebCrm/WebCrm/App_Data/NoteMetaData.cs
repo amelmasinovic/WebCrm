@@ -19,5 +19,18 @@ namespace WebCrm.App_Data
 		public string Description { get; set; }
 		[Display(Name = "Korisnik koje je napravio unos")]
 		public string CreateUser { get; set; }
+		[Display(Name = "Firma")]
+		public Nullable<int> CompanyId { get; set; }
+		[Display(Name = "Osoba")]
+		public Nullable<int> PersonId { get; set; }
+		[Display(Name = "Zadatak")]
+		public Nullable<int> TaskId { get; set; }
+
+		[Display(Name = "Firma")]
+		public virtual Company Company { get; set; }
+		[Display(Name = "Osoba")]
+		public virtual Person Person { get; set; }
+		[Display(Name = "Zadatak")]
+		public virtual Task Task { get; set; }
 	}
 }

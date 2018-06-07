@@ -15,19 +15,19 @@
     <div class="col-md-4">
         <h2>Zadnje bilješke</h2>
         <ul>
-            @foreach (var note in Model.Notes.OrderByDescending(x => x.Id))
+            @foreach (var note in Model.Notes.Take(10).OrderByDescending(x => x.Id))
             {
             <li>
                 <p>
+                    @if (note.Company != null)
+                    {<a href="@Url.Action("Details", "CompanyList", new { id = note.Company.Id })"><span>Firma: @note.Company.Name </span></a><br />}
+                    @if (note.Person != null)
+                    {<a href="@Url.Action("Details", "PersonList", new { id = note.Person.Id })"><span>Osoba: @note.Person.Forename @note.Person.Surname</span></a><br />}
+                    @if (note.Task != null)
+                    {<a href="@Url.Action("Details", "TaskList", new { id = note.Task.Id })"><span>Zadatak: @note.Task.Name</span></a><br />}
                     @note.Name
                     @if (note.Description != null)
                     {<br />@note.Description}
-                    @if (note.Company != null)
-                    {<br /><a href="@Url.Action("Details", "CompanyList", new { id = note.Company.Id })"><span>Firma: @note.Company.Name </span></a>}
-                    @if (note.Person != null)
-                    {<br /><a href="@Url.Action("Details", "PersonList", new { id = note.Person.Id })"><span>Osoba: @note.Person.Forename @note.Person.Surname</span></a>}
-                    @if (note.Task != null)
-                    {<br /><a href="@Url.Action("Details", "TaskList", new { id = note.Task.Id })"><span>Osoba: @note.Task.Name</span></a>}
                 </p>
                 <hr />
             </li>}
@@ -43,14 +43,15 @@
             {
             <li>
                 <p>
-                    <a href="@Url.Action("Details", "TaskList", new {id = task.Id})">@task.Name</a>
-                    @if (task.Description != null)
-                    {<br /><a href="@Url.Action("Details", "TaskList", new {id = task.Id})">@task.Description</a>}
                     @if (task.Company != null)
-                    {<br /><a href="@Url.Action("Details", "CompanyList", new { id = task.Company.Id })"><span>Firma: @task.Company.Name </span></a>}
+                    {<a href="@Url.Action("Details", "CompanyList", new { id = task.Company.Id })"><span>Firma: @task.Company.Name </span></a><br />}
                     @if (task.Person != null)
-                    {<br /><a href="@Url.Action("Details", "PersonList", new { id = task.Person.Id })"><span>Osoba: @task.Person.Forename @task.Person.Surname</span></a>}
-
+                    {<a href="@Url.Action("Details", "PersonList", new { id = task.Person.Id })"><span>Osoba: @task.Person.Forename @task.Person.Surname</span></a><br />}
+                    <a href="@Url.Action("Details", "TaskList", new {id = task.Id})">
+                        @task.Name
+                        @if (task.Description != null)
+                        {<br />@task.Description}
+                    </a>
                 </p>
                 <hr />
             </li>}

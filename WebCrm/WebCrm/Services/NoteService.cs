@@ -13,7 +13,7 @@ namespace WebCrm.Services
 
 			if (crudOperation == CrudOperation.Create)
 			{
-				note.Name = "Novi unos od korisnika  " + createUser.UserName +":";
+				note.Name = "Novi unos od korisnika  " + createUser.UserName;
 				note.Person = person;
 				note.Company = company;
 				note.Task = task;
@@ -21,7 +21,7 @@ namespace WebCrm.Services
 
 			if (crudOperation == CrudOperation.Update)
 			{
-				note.Name = "Promjena unosa od korisnika " + createUser.UserName + ":";
+				note.Name = "Promjena unosa od korisnika " + createUser.UserName;
 				note.Person = person;
 				note.Company = company;
 				note.Task = task;
@@ -31,7 +31,7 @@ namespace WebCrm.Services
 			{
 				if (company != null)
 				{
-					note.Name = "Firma \"" + company.Name + "\" izbrisana od korisnika " + createUser.UserName+".";
+					note.Name = "Firma \"" + company.Name + "\" izbrisana od korisnika " + createUser.UserName;
 					foreach (var tempNote in db.NoteSet.Where(x => x.CompanyId == company.Id))
 					{
 						db.NoteSet.Remove(tempNote);
@@ -39,7 +39,7 @@ namespace WebCrm.Services
 				}
 				if (person != null)
 				{
-					note.Name = "Osoba \"" + person.Forename + " " + person.Surname + "\" izbrisana od korisnika  " + createUser.UserName + ".";
+					note.Name = "Osoba \"" + person.Forename + " " + person.Surname + "\" izbrisana od korisnika  " + createUser.UserName;
 					foreach (var tempNote in db.NoteSet.Where(x => x.PersonId == person.Id))
 					{
 						db.NoteSet.Remove(tempNote);
@@ -47,7 +47,7 @@ namespace WebCrm.Services
 				}
 				if (task != null)
 				{
-					note.Name = "Zadatak \"" + task.Name + "\" izbrisan od korisnika " + createUser.UserName + ".";
+					note.Name = "Zadatak \"" + task.Name + "\" izbrisan od korisnika " + createUser.UserName;
 					foreach (var tempNote in db.NoteSet.Where(x => x.TaskId == task.Id))
 					{
 						db.NoteSet.Remove(tempNote);

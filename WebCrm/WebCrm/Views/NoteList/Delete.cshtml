@@ -5,15 +5,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>Izbriši unos</h2>
 
 <h3>Da li ste sigurni da želite izbrisati unos?</h3>
 <div>
-    <h4>Note</h4>
+    <h4>Bilješke</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Company)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Person)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Person.Forename) @Html.DisplayFor(model => model.Person.Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Task)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Task.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model)
         </dt>
 
         <dd>
@@ -27,6 +50,10 @@
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateUser)
+        </dt>
     </dl>
 
     @using (Html.BeginForm()) {

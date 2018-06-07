@@ -23,6 +23,12 @@ namespace WebCrm.Controllers
 		// GET: TaskList
 		public ActionResult Index()
 		{
+			var tasks = db.TaskSet.ToList();
+			foreach (var task in tasks)
+			{
+				task.CreateUserObject = UserManager.FindById(task.CreateUser);
+			}
+
 			return View(db.TaskSet.ToList());
 		}
 
@@ -65,7 +71,7 @@ namespace WebCrm.Controllers
 			{
 				task.CreateUser = User.Identity.GetUserId();
 
-				noteService.CreateNote(db, CrudOperation.Create, UserManager.FindById(task.CreateUser), null, null, task);
+				noteService.CreateNote(db, CrudOperation.Create, UserManager.FindById(User.Identity.GetUserId()), null, null, task);
 
 				db.TaskSet.Add(task);
 				db.SaveChanges();
@@ -106,11 +112,11 @@ namespace WebCrm.Controllers
 		// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit([Bind(Include = "Id,Name,Description,Date,CreateUser")] Task task)
+		public ActionResult Edit([Bind(Include = "Id,Name,Description,Date,CreateUser,CompanyId,PersionId")] Task task)
 		{
 			if (ModelState.IsValid)
 			{
-				noteService.CreateNote(db, CrudOperation.Update, UserManager.FindById(task.CreateUser), null, null, task);
+				noteService.CreateNote(db, CrudOperation.Update, UserManager.FindById(User.Identity.GetUserId()), null, null, task);
 
 				db.Entry(task).State = EntityState.Modified;
 				db.SaveChanges();
@@ -141,7 +147,7 @@ namespace WebCrm.Controllers
 		{
 			Task task = db.TaskSet.Find(id);
 
-			noteService.CreateNote(db, CrudOperation.Delete, UserManager.FindById(task.CreateUser), null, null, task);
+			noteService.CreateNote(db, CrudOperation.Delete, UserManager.FindById(User.Identity.GetUserId()), null, null, task);
 
 			db.TaskSet.Remove(task);
 			db.SaveChanges();

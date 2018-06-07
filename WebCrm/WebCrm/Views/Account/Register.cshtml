@@ -1,12 +1,15 @@
 ﻿@model WebCrm.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Registracija";
+  ViewBag.Title = "Registracija";
+  Layout = "";
 }
+@Styles.Render("~/Content/css")
 
-<h2>@ViewBag.Title</h2>
+<div class="container">
+    <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
     @Html.AntiForgeryToken()
     <h4>Napravi novi konto.</h4>
     <hr />
@@ -40,8 +43,9 @@
             <input type="submit" class="btn btn-default" value="Register" />
         </div>
     </div>
-}
+    }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

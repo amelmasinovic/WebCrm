@@ -21,7 +21,8 @@ namespace WebCrm.Controllers
 		// GET: NoteList
 		public ActionResult Index()
 		{
-			return View(db.NoteSet.ToList());
+			var noteSet = db.NoteSet.Include(n => n.Company).Include(n => n.Person).Include(n => n.Task);
+			return View(noteSet.ToList());
 		}
 
 		// GET: NoteList/Details/5
@@ -36,6 +37,7 @@ namespace WebCrm.Controllers
 			{
 				return HttpNotFound();
 			}
+
 			note.CreateUserObject = UserManager.FindById(note.CreateUser);
 
 			return View(note);
@@ -44,22 +46,34 @@ namespace WebCrm.Controllers
 		// GET: NoteList/Create
 		public ActionResult Create()
 		{
+			var companyList = GetCompanySelectList();
+			ViewBag.CompanyList = companyList;
+			var personList = GetPersonSelectList();
+			ViewBag.PersonList = personList;
+
 			return View();
 		}
 
 		// POST: NoteList/Create
 		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-		// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create([Bind(Include = "Id,Name,Description,CreateUser")] Note note)
+		public ActionResult Create([Bind(Include = "Id,Name,Description,CreateUser,CreateDate,CompanyId,PersonId,TaskId")] Note note)
 		{
 			if (ModelState.IsValid)
 			{
+				note.CreateUser = User.Identity.GetUserId();
+
 				db.NoteSet.Add(note);
 				db.SaveChanges();
 				return RedirectToAction("Index");
 			}
+
+			var companyList = GetCompanySelectList();
+			ViewBag.CompanyList = companyList;
+			var personList = GetPersonSelectList();
+			ViewBag.PersonList = personList;
 
 			return View(note);
 		}
@@ -76,15 +90,21 @@ namespace WebCrm.Controllers
 			{
 				return HttpNotFound();
 			}
+
+			var companyList = GetCompanySelectList();
+			ViewBag.CompanyList = companyList;
+			var personList = GetPersonSelectList();
+			ViewBag.PersonList = personList;
+
 			return View(note);
 		}
 
 		// POST: NoteList/Edit/5
 		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-		// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit([Bind(Include = "Id,Name,Description,CreateUser")] Note note)
+		public ActionResult Edit([Bind(Include = "Id,Name,Description,CreateUser,CreateDate,CompanyId,PersonId,TaskId")] Note note)
 		{
 			if (ModelState.IsValid)
 			{
@@ -92,6 +112,12 @@ namespace WebCrm.Controllers
 				db.SaveChanges();
 				return RedirectToAction("Index");
 			}
+
+			var companyList = GetCompanySelectList();
+			ViewBag.CompanyList = companyList;
+			var personList = GetPersonSelectList();
+			ViewBag.PersonList = personList;
+
 			return View(note);
 		}
 
@@ -128,6 +154,34 @@ namespace WebCrm.Controllers
 				db.Dispose();
 			}
 			base.Dispose(disposing);
+		}
+		private List<SelectListItem> GetCompanySelectList()
+		{
+			var companies = db.CompanySet.ToList();
+			var companyList = new List<SelectListItem>();
+			foreach (var company in companies)
+			{
+				companyList.Add(new SelectListItem
+				{
+					Text = company.Name,
+					Value = company.Id.ToString()
+				});
+			}
+			return companyList;
+		}
+		private object GetPersonSelectList()
+		{
+			var personSet = db.PersonSet.ToList();
+			var personList = new List<SelectListItem>();
+			foreach (var person in personSet)
+			{
+				personList.Add(new SelectListItem
+				{
+					Text = person.Forename + " " + person.Surname,
+					Value = person.Id.ToString()
+				});
+			}
+			return personList;
 		}
 	}
 }

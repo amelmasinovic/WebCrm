@@ -191,10 +191,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CompanyListController.cs" />
+    <Compile Include="Controllers\NoteListController.cs" />
     <Compile Include="Models\DashboardViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\NoteListController.cs" />
     <Compile Include="Controllers\PersonListController.cs" />
     <Compile Include="Controllers\TaskListController.cs" />
     <Compile Include="Global.asax.cs">
@@ -346,11 +346,6 @@
     <Content Include="Views\TaskList\Details.cshtml" />
     <Content Include="Views\TaskList\Edit.cshtml" />
     <Content Include="Views\TaskList\Index.cshtml" />
-    <Content Include="Views\NoteList\Create.cshtml" />
-    <Content Include="Views\NoteList\Delete.cshtml" />
-    <Content Include="Views\NoteList\Details.cshtml" />
-    <Content Include="Views\NoteList\Edit.cshtml" />
-    <Content Include="Views\NoteList\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -361,6 +356,11 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\NoteList\Create.cshtml" />
+    <Content Include="Views\NoteList\Delete.cshtml" />
+    <Content Include="Views\NoteList\Details.cshtml" />
+    <Content Include="Views\NoteList\Edit.cshtml" />
+    <Content Include="Views\NoteList\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Model\" />

@@ -70,7 +70,7 @@ namespace WebCrm.Controllers
 			{
 				person.CreateUser = User.Identity.GetUserId();
 
-				noteService.CreateNote(db, CrudOperation.Create, UserManager.FindById(person.CreateUser), person, null, null);
+				noteService.CreateNote(db, CrudOperation.Create, UserManager.FindById(User.Identity.GetUserId()), person, null, null);
 
 				db.PersonSet.Add(person);
 				db.SaveChanges();
@@ -120,11 +120,11 @@ namespace WebCrm.Controllers
 		// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit([Bind(Include = "Id,Forename,Surname,Email,Phone,CreateUser,CompanyId")] Person person)
+		public ActionResult Edit([Bind(Include = "Id,Forename,Surname,Email,Phone,CompanyId")] Person person)
 		{
 			if (ModelState.IsValid)
 			{
-				noteService.CreateNote(db, CrudOperation.Update, UserManager.FindById(person.CreateUser), person, null, null);
+				noteService.CreateNote(db, CrudOperation.Update, UserManager.FindById(User.Identity.GetUserId()), person, null, null);
 
 				db.Entry(person).State = EntityState.Modified;
 				db.SaveChanges();
@@ -159,7 +159,7 @@ namespace WebCrm.Controllers
 		{
 			Person person = db.PersonSet.Find(id);
 
-			noteService.CreateNote(db, CrudOperation.Delete, UserManager.FindById(person?.CreateUser), person, null, null);
+			noteService.CreateNote(db, CrudOperation.Delete, UserManager.FindById(User.Identity.GetUserId()), person, null, null);
 
 			db.PersonSet.Remove(person);
 			db.SaveChanges();

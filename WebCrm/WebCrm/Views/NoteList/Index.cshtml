@@ -1,12 +1,22 @@
 ﻿@model IEnumerable<WebCrm.App_Data.Note>
 
 @{
-    ViewBag.Title = "Lista bilješki";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+  ViewBag.Title = "Lista bilješki";
+  Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Lista bilješki</h2>
+<h1>Lista bilješki</h1>
 <br />
+
+@if (!Model.Any())
+{
+<h4>Trenutno ne postoji unos</h4>
+<p>
+    @Html.ActionLink("Novi unos", "Create")
+</p>
+}
+else
+{
 <p>
     @Html.ActionLink("Novi unos", "Create")
 </p>
@@ -21,27 +31,46 @@
         <th>
             @Html.DisplayNameFor(model => model.CreateUser)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Company)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Task)
+        </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateUser)
-            </td>
-            <td>
-                @Html.ActionLink("Uredi", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Detalji", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Izbriši", "Delete", new { id = item.Id })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateUserObject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Company.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.Forename) @Html.DisplayFor(modelItem => item.Person.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Task.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Uredi", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Detalji", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Izbriši", "Delete", new { id = item.Id })
+        </td>
+    </tr>
     }
 
 </table>
+}
