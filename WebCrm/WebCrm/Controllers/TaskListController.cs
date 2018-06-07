@@ -65,7 +65,7 @@ namespace WebCrm.Controllers
 			{
 				task.CreateUser = User.Identity.GetUserId();
 
-				noteService.CreateNote(CrudOperation.Create, UserManager.FindById(task.CreateUser), null, null, task);
+				noteService.CreateNote(db, CrudOperation.Create, UserManager.FindById(task.CreateUser), null, null, task);
 
 				db.TaskSet.Add(task);
 				db.SaveChanges();
@@ -110,7 +110,7 @@ namespace WebCrm.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				noteService.CreateNote(CrudOperation.Update, UserManager.FindById(task.CreateUser), null, null, task);
+				noteService.CreateNote(db, CrudOperation.Update, UserManager.FindById(task.CreateUser), null, null, task);
 
 				db.Entry(task).State = EntityState.Modified;
 				db.SaveChanges();
@@ -141,7 +141,7 @@ namespace WebCrm.Controllers
 		{
 			Task task = db.TaskSet.Find(id);
 
-			noteService.CreateNote(CrudOperation.Delete, UserManager.FindById(task.CreateUser), null, null, task);
+			noteService.CreateNote(db, CrudOperation.Delete, UserManager.FindById(task.CreateUser), null, null, task);
 
 			db.TaskSet.Remove(task);
 			db.SaveChanges();

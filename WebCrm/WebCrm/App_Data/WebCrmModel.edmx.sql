@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/07/2018 10:58:57
+-- Date Created: 06/07/2018 11:08:17
 -- Generated from EDMX file: C:\Users\amel.masinovic\Documents\GitHub\WebCrm\WebCrm\WebCrm\App_Data\WebCrmModel.edmx
 -- --------------------------------------------------
 
@@ -77,10 +77,9 @@ CREATE TABLE [dbo].[NoteSet] (
     [Description] nvarchar(max)  NULL,
     [CreateUser] nvarchar(max)  NULL,
     [CreateDate] datetime  NULL,
-    [CompanyId] int  NOT NULL,
-    [PersonId] int  NOT NULL,
-    [TaskId] int  NULL,
-    [TaskId1] int  NOT NULL
+    [CompanyId] int  NULL,
+    [PersonId] int  NULL,
+    [TaskId] int  NULL
 );
 GO
 
@@ -93,7 +92,7 @@ CREATE TABLE [dbo].[PersonSet] (
     [Phone] nvarchar(max)  NULL,
     [CreateUser] nvarchar(max)  NULL,
     [CreateDate] datetime  NULL,
-    [CompanyId] int  NOT NULL
+    [CompanyId] int  NULL
 );
 GO
 
@@ -104,8 +103,8 @@ CREATE TABLE [dbo].[TaskSet] (
     [Description] nvarchar(max)  NULL,
     [CreateUser] nvarchar(max)  NULL,
     [CreateDate] datetime  NULL,
-    [CompanyId] int  NOT NULL,
-    [PersonId] int  NOT NULL
+    [CompanyId] int  NULL,
+    [PersonId] int  NULL
 );
 GO
 
@@ -216,10 +215,10 @@ ON [dbo].[NoteSet]
     ([PersonId]);
 GO
 
--- Creating foreign key on [TaskId1] in table 'NoteSet'
+-- Creating foreign key on [TaskId] in table 'NoteSet'
 ALTER TABLE [dbo].[NoteSet]
 ADD CONSTRAINT [FK_TaskNote]
-    FOREIGN KEY ([TaskId1])
+    FOREIGN KEY ([TaskId])
     REFERENCES [dbo].[TaskSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -228,7 +227,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_TaskNote'
 CREATE INDEX [IX_FK_TaskNote]
 ON [dbo].[NoteSet]
-    ([TaskId1]);
+    ([TaskId]);
 GO
 
 -- --------------------------------------------------

@@ -24,7 +24,6 @@ namespace WebCrm.App_Data
 		public int PersonId { get; set; }
 
 		[Display(Name = "Firma")]
-		[Required()]
 		public virtual Company Company { get; set; }
 		[Display(Name = "Osoba")]
 		public virtual Person Person { get; set; }

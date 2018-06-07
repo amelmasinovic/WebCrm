@@ -52,10 +52,9 @@
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreateDate" Type="datetime" Nullable="true" />
-    <Property Name="CompanyId" Type="int" Nullable="false" />
-    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="true" />
+    <Property Name="PersonId" Type="int" Nullable="true" />
     <Property Name="TaskId" Type="int" Nullable="true" />
-    <Property Name="TaskId1" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PersonSet">
     <Key>
@@ -68,7 +67,7 @@
     <Property Name="Phone" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreateDate" Type="datetime" Nullable="true" />
-    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="TaskSet">
     <Key>
@@ -79,11 +78,11 @@
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreateUser" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CreateDate" Type="datetime" Nullable="true" />
-    <Property Name="CompanyId" Type="int" Nullable="false" />
-    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="true" />
+    <Property Name="PersonId" Type="int" Nullable="true" />
   </EntityType>
   <Association Name="CompanyPerson">
-    <End Role="Company" Type="WebCrmModel.Store.CompanySet" Multiplicity="1" />
+    <End Role="Company" Type="WebCrmModel.Store.CompanySet" Multiplicity="0..1" />
     <End Role="Person" Type="WebCrmModel.Store.PersonSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Company">
@@ -95,7 +94,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="CompanyTask">
-    <End Role="Company" Type="WebCrmModel.Store.CompanySet" Multiplicity="1" />
+    <End Role="Company" Type="WebCrmModel.Store.CompanySet" Multiplicity="0..1" />
     <End Role="Task" Type="WebCrmModel.Store.TaskSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Company">
@@ -107,7 +106,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="PersonTask">
-    <End Role="Person" Type="WebCrmModel.Store.PersonSet" Multiplicity="1" />
+    <End Role="Person" Type="WebCrmModel.Store.PersonSet" Multiplicity="0..1" />
     <End Role="Task" Type="WebCrmModel.Store.TaskSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Person">
@@ -119,7 +118,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="CompanyNote">
-    <End Role="Company" Type="WebCrmModel.Store.CompanySet" Multiplicity="1" />
+    <End Role="Company" Type="WebCrmModel.Store.CompanySet" Multiplicity="0..1" />
     <End Role="Note" Type="WebCrmModel.Store.NoteSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Company">
@@ -131,7 +130,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="PersonNote">
-    <End Role="Person" Type="WebCrmModel.Store.PersonSet" Multiplicity="1" />
+    <End Role="Person" Type="WebCrmModel.Store.PersonSet" Multiplicity="0..1" />
     <End Role="Note" Type="WebCrmModel.Store.NoteSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Person">
@@ -143,14 +142,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="TaskNote">
-    <End Role="Task" Type="WebCrmModel.Store.TaskSet" Multiplicity="1" />
+    <End Role="Task" Type="WebCrmModel.Store.TaskSet" Multiplicity="0..1" />
     <End Role="Note" Type="WebCrmModel.Store.NoteSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Task">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Note">
-        <PropertyRef Name="TaskId1" />
+        <PropertyRef Name="TaskId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

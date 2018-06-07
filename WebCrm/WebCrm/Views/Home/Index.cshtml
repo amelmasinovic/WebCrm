@@ -15,10 +15,22 @@
     <div class="col-md-4">
         <h2>Zadnje bilješke</h2>
         <ul>
-            @foreach (var note in Model.Notes)
+            @foreach (var note in Model.Notes.OrderByDescending(x => x.Id))
             {
-            @note.Name
-            @note.Description}
+            <li>
+                <p>
+                    @note.Name
+                    @if (note.Description != null)
+                    {<br />@note.Description}
+                    @if (note.Company != null)
+                    {<br /><a href="@Url.Action("Details", "CompanyList", new { id = note.Company.Id })"><span>Firma: @note.Company.Name </span></a>}
+                    @if (note.Person != null)
+                    {<br /><a href="@Url.Action("Details", "PersonList", new { id = note.Person.Id })"><span>Osoba: @note.Person.Forename @note.Person.Surname</span></a>}
+                    @if (note.Task != null)
+                    {<br /><a href="@Url.Action("Details", "TaskList", new { id = note.Task.Id })"><span>Osoba: @note.Task.Name</span></a>}
+                </p>
+                <hr />
+            </li>}
         </ul>
         @if (Model.Notes.Count < 1)
         {
@@ -27,20 +39,23 @@
     <div class="col-md-8">
         <h2>Aktuelni zadaci</h2>
         <ul>
-            @foreach (var task in Model.Tasks)
+            @foreach (var task in Model.Tasks.OrderByDescending(x => x.Id))
             {
             <li>
                 <p>
-                    <a href="@Url.Action("Details", "TaskList", new {id = task.Id})">@task.Name<br />@task.Description</a>
-                    (@if (task.Company != null)
-                    {<a href="@Url.Action("Details", "CompanyList", new { id = task.Company.Id })"><span>Firma: @task.Company.Name </span></a>}
+                    <a href="@Url.Action("Details", "TaskList", new {id = task.Id})">@task.Name</a>
+                    @if (task.Description != null)
+                    {<br /><a href="@Url.Action("Details", "TaskList", new {id = task.Id})">@task.Description</a>}
+                    @if (task.Company != null)
+                    {<br /><a href="@Url.Action("Details", "CompanyList", new { id = task.Company.Id })"><span>Firma: @task.Company.Name </span></a>}
                     @if (task.Person != null)
-                    {<a href="@Url.Action("Details", "PersonList", new { id = task.Person.Id })"><span>Osoba: @task.Person.Forename @task.Person.Surname</span></a>})
+                    {<br /><a href="@Url.Action("Details", "PersonList", new { id = task.Person.Id })"><span>Osoba: @task.Person.Forename @task.Person.Surname</span></a>}
+
                 </p>
                 <hr />
             </li>}
         </ul>
-        @if (Model.Notes.Count < 1)
+        @if (Model.Tasks.Count < 1)
         {
         <p>Trenutno ne postoji zadataka u sistemu</p>
         }

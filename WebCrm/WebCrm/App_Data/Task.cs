@@ -25,8 +25,8 @@ namespace WebCrm.App_Data
         public string Description { get; set; }
         public string CreateUser { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
-        public int CompanyId { get; set; }
-        public int PersonId { get; set; }
+        public Nullable<int> CompanyId { get; set; }
+        public Nullable<int> PersonId { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual Person Person { get; set; }
