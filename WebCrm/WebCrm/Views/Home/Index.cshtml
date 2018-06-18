@@ -19,15 +19,15 @@
             {
             <li>
                 <p>
-                    @if (note.Company != null)
-                    {<a href="@Url.Action("Details", "CompanyList", new { id = note.Company.Id })"><span>Firma: @note.Company.Name </span></a><br />}
-                    @if (note.Person != null)
-                    {<a href="@Url.Action("Details", "PersonList", new { id = note.Person.Id })"><span>Osoba: @note.Person.Forename @note.Person.Surname</span></a><br />}
-                    @if (note.Task != null)
-                    {<a href="@Url.Action("Details", "TaskList", new { id = note.Task.Id })"><span>Zadatak: @note.Task.Name</span></a><br />}
-                    @note.Name
+                    <b>@note.Name</b><br />
                     @if (note.Description != null)
-                    {<br />@note.Description}
+                    {@note.Description<br />}
+                    @if (note.Company != null)
+                    {<a href="@Url.Action("Details", "CompanyList", new {id = note.Company.Id})"><span>Firma: @note.Company.Name </span></a><br/>}
+                    @if (note.Person != null)
+                    {<a href="@Url.Action("Details", "PersonList", new {id = note.Person.Id})"><span>Osoba: @note.Person.Forename @note.Person.Surname</span></a><br/>}
+                    @if (note.Task != null)
+                    {<a href="@Url.Action("Details", "TaskList", new {id = note.Task.Id})"><span>Zadatak: @note.Task.Name</span></a><br />}
                 </p>
                 <hr />
             </li>}
@@ -48,7 +48,7 @@
                     @if (task.Person != null)
                     {<a href="@Url.Action("Details", "PersonList", new { id = task.Person.Id })"><span>Osoba: @task.Person.Forename @task.Person.Surname</span></a><br />}
                     <a href="@Url.Action("Details", "TaskList", new {id = task.Id})">
-                        @task.Name
+                        <b>@task.Name</b>
                         @if (task.Description != null)
                         {<br />@task.Description}
                     </a>

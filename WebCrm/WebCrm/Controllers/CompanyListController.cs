@@ -120,7 +120,9 @@ namespace WebCrm.Controllers
 			{
 				noteService.CreateNote(db, CrudOperation.Update, UserManager.FindById(User.Identity.GetUserId()), null, company);
 
-				db.Entry(company).State = EntityState.Modified;
+				company.CreateUser = User.Identity.GetUserId();
+
+                db.Entry(company).State = EntityState.Modified;
 				db.SaveChanges();
 				return RedirectToAction("Index");
 			}

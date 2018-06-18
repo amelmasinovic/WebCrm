@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -439,7 +440,10 @@ namespace WebCrm.Controllers
         {
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError("", error);
+                var translatedError = Regex.Replace(error, "Name", "Ime");
+                translatedError = Regex.Replace(translatedError, "is already taken", "več postoji");
+
+                ModelState.AddModelError("", translatedError);
             }
         }
 
